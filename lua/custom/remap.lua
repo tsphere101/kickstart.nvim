@@ -51,3 +51,5 @@ vim.keymap.set('n', '<leader>mr', '<cmd>CellularAutomaton make_it_rain<CR>')
 vim.keymap.set('n', '<leader><leader>', function()
   vim.cmd 'so'
 end)
+
+vim.keymap.set('i', '<C-f>', '<esc>yiwi<lt><esc>ea></><esc>hpF>i')
