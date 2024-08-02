@@ -508,6 +508,11 @@ require('lazy').setup({
             },
           },
         },
+
+        jsonls = {
+          cmd = { 'vscode-json-language-server', '--stdio' },
+          filetypes = { 'json', 'jsonc' },
+        },
       }
 
       -- Ensure the servers and tools above are installed

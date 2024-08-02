@@ -35,6 +35,7 @@ return { -- Autoformat
       javascript = { { 'prettierd', 'prettier' } },
       html = { 'prettier' },
       go = { 'gofmt' },
+      json = { 'prettier' },
     },
   },
 }
