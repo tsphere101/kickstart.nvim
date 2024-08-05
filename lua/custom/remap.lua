@@ -53,4 +53,4 @@ vim.keymap.set('n', '<leader><leader>', function()
 end)
 
 -- html tag
-vim.keymap.set('i', '<C-f>', '<esc>yiwi<lt><esc>ea></><esc>hpF>a')
+vim.keymap.set('i', '<C-f>', '<esc>yiwi<lt><esc>ea></><esc>hpF>i ')
