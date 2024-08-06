@@ -6,13 +6,14 @@ return { -- Autoformat
       '<leader>f',
       function()
         require('conform').format { async = false, lsp_fallback = true, timeout_ms = 500 }
+        print 'Formatted buffer'
       end,
       mode = '',
       desc = '[F]ormat buffer',
     },
   },
   opts = {
-    notify_on_error = false,
+    notify_on_error = true,
     format_on_save = function(bufnr)
       -- Disable "format_on_save lsp_fallback" for languages that don't
       -- have a well standardized coding style. You can add additional
@@ -32,8 +33,12 @@ return { -- Autoformat
       --
       -- You can use a sub-list to tell conform to run *until* a formatter
       -- is found.
-      javascript = { { 'prettierd', 'prettier' } },
-      html = { 'prettier' },
+      js = { { 'prettierd', 'prettier' } },
+      ts = { { 'prettierd', 'prettier' } },
+      jsx = { { 'prettierd', 'prettier' } },
+      tsx = { { 'prettierd', 'prettier' } },
+
+      html = { 'prettierd', 'prettier' },
       go = { 'gofmt' },
       json = { 'prettier' },
     },
