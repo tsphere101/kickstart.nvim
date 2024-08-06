@@ -535,6 +535,10 @@ require('lazy').setup({
           cmd = { 'vscode-json-language-server', '--stdio' },
           filetypes = { 'json', 'jsonc' },
         },
+
+        html = {
+          filetypes = { 'html' },
+        },
       }
 
       -- Ensure the servers and tools above are installed

@@ -5,8 +5,8 @@ return { -- Autoformat
     {
       '<leader>f',
       function()
-        require('conform').format { async = false, lsp_fallback = true, timeout_ms = 500 }
-        print 'Formatted buffer'
+        local rt = require('conform').format { async = false, lsp_fallback = true, timeout_ms = 500 }
+        print('Formatted buffer: ' .. tostring(rt))
       end,
       mode = '',
       desc = '[F]ormat buffer',
