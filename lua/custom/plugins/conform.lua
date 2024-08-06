@@ -32,13 +32,6 @@ return { -- Autoformat
       python = { 'isort', 'black' },
       --
       -- You can use a sub-list to tell conform to run *until* a formatter
-      -- is found.
-      js = { { 'prettierd', 'prettier' } },
-      ts = { { 'prettierd', 'prettier' } },
-      jsx = { { 'prettierd', 'prettier' } },
-      tsx = { { 'prettierd', 'prettier' } },
-
-      html = { 'prettierd', 'prettier' },
       go = { 'gofmt' },
       json = { 'prettier' },
     },
