@@ -268,6 +268,7 @@ require('lazy').setup({
             '--line-number', -- Show line numbers
             '--column', -- Show column numbers
             '--smart-case', -- Smart case search
+            '--no-ignore-vcs',
           },
         },
         pickers = {
@@ -276,6 +277,7 @@ require('lazy').setup({
             find_command = {
               'rg',
               '--ignore',
+              '--no-ignore-vcs',
               '--files',
               '--hidden', -- Search for hidden files
             },
