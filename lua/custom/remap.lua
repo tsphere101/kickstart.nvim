@@ -54,3 +54,9 @@ end)
 
 -- html tag
 vim.keymap.set('i', '<C-f>', '<esc>yiwi<lt><esc>ea></><esc>hpF>i ')
+
+-- Write buffer
+vim.keymap.set('n', 's', '<cmd>w<CR>')
+
+-- Quit
+vim.keymap.set('n', 'Q', '<cmd>wq<CR>')
