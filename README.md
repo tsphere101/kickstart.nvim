@@ -1,4 +1,8 @@
-# kickstart.nvim
+# tsphere101.nvim
+
+```
+git clone https://github.com/tsphere101/kickstart.nvim/ ~/.config/nvim/
+```
 
 ## Introduction
 
