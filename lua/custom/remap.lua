@@ -59,4 +59,4 @@ vim.keymap.set('i', '<C-f>', '<esc>yiwi<lt><esc>ea></><esc>hpF>i ')
 vim.keymap.set('n', 's', '<cmd>w<CR>')
 
 -- Quit
-vim.keymap.set('n', 'Q', '<cmd>wq<CR>')
+vim.keymap.set('n', 'Q', '<cmd>q<CR>')

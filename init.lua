@@ -279,6 +279,8 @@ require('lazy').setup({
               '--no-ignore-vcs',
               '--files',
               '--hidden', -- Search for hidden files
+              '--glob', -- Ignore .git/objects/
+              '!*.git/objects/*', -- .git/objects/ pattern
             },
           },
         },
@@ -557,7 +559,6 @@ require('lazy').setup({
         'stylua', -- Used to format Lua code
         'prettier', -- Used to format JavaScript, TypeScript, etc.
         'prettierd', -- Used to format JavaScript, TypeScript, etc.
-        'black', -- Used to format Python code
         'isort', -- Used to sort Python imports
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
