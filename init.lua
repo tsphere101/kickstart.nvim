@@ -281,6 +281,12 @@ require('lazy').setup({
               '--hidden', -- Search for hidden files
               '--glob', -- Ignore .git/objects/
               '!*.git/objects/*', -- .git/objects/ pattern
+              '--glob',
+              '!*.git/*', -- Exclude .git directory
+              '--glob',
+              '!node_modules/*', -- Exclude node_modules directory
+              '--glob',
+              '!.next/*', -- Exclude node_modules directory
             },
           },
         },
@@ -335,9 +341,42 @@ require('lazy').setup({
 
   { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
+    opts = {
+      servers = {
+        omnisharp = {
+          handlers = {
+            ['textDocument/definition'] = function(...)
+              return require('omnisharp_extended').handler(...)
+            end,
+          },
+          keys = {
+            {
+              'gd',
+              function()
+                local telescope_status, telescope = pcall(require, 'telescope.builtin')
+                if telescope_status then
+                  require('omnisharp_extended').telescope_lsp_definitions()
+                else
+                  require('omnisharp_extended').lsp_definitions()
+                end
+              end,
+              desc = 'Goto Definition',
+            },
+          },
+          enable_roslyn_analyzers = true,
+          organize_imports_on_format = true,
+          enable_import_completion = true,
+        },
+      },
+    },
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
-      { 'williamboman/mason.nvim', config = true }, -- NOTE: Must be loaded before dependants
+      { 'williamboman/mason.nvim', config = true, opts = {
+        ensure_installed = {
+          'csharpier',
+          'netcoredbg',
+        },
+      } }, -- NOTE: Must be loaded before dependants
       'williamboman/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -542,6 +581,7 @@ require('lazy').setup({
         html = {
           filetypes = { 'html' },
         },
+        -- csharp_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -581,6 +621,7 @@ require('lazy').setup({
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
+  { 'Hoffs/omnisharp-extended-lsp.nvim', lazy = true },
 
   require 'custom.plugins.conform',
   require 'custom.plugins.cmp',
@@ -631,7 +672,7 @@ require('lazy').setup({
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'vim', 'vimdoc', 'c_sharp' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {
@@ -682,7 +723,13 @@ require('lazy').setup({
   --  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
   --    For additional information, see `:help lazy.nvim-lazy.nvim-structuring-your-plugins`
   -- { import = 'custom.plugins' },
-  'github/copilot.vim',
+  --
+  -- 'github/copilot.vim',
+  {
+    'Exafunction/codeium.vim',
+    event = 'BufEnter',
+  },
+  --
 }, {
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
@@ -871,7 +918,7 @@ ins_right {
   function()
     local msg = 'No Active Lsp'
     local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-    local clients = vim.lsp.get_active_clients()
+    local clients = vim.lsp.get_clients()
     if next(clients) == nil then
       return msg
     end
