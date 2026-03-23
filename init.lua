@@ -725,10 +725,6 @@ require('lazy').setup({
   -- { import = 'custom.plugins' },
   --
   -- 'github/copilot.vim',
-  {
-    'Exafunction/codeium.vim',
-    event = 'BufEnter',
-  },
   --
 }, {
   ui = {
